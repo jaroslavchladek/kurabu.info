@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://thymeleaf.org"
+      xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <meta name="keywords" content="japan, nippon, clubs, kurabu, tokyo, osaka, nagoya">
+    <meta name="copyright" content="© Galois Fields (galoisfieldsgf@gmail.com), All rights reserved.">
+    <meta name="description" content="kurabu.info | Your gateway to Japanese clubs.">
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">kurabu.info</title>
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <a class="btn btn-link" style="text-decoration: none;" th:href="@{/clubs}"><h4 class="my-0 mr-md-auto font-weight-normal" th:href="@{/clubs}">kurabu.info</h4></a>
+        <form th:action="@{/clubs/search}" class="form-inline">
+            <input name="query" class="form-control" type="search" placeholder="Search clubs" aria-label="Search">
+        </form>
+    <nav class="my-2 my-md-0 mr-md-3 ml-auto">
+        <a class="p-2 text-dark" th:href="@{/clubs}">Home</a>
+        <a class="p-2 text-dark" th:href="@{/clubs}">Find Clubs</a>
+        <a class="p-2 text-dark" th:href="@{/events}">Find Events</a>
+        <a class="p-2 text-dark" th:href="@{/clubs/new}">Add a Club</a>
+        <a class="p-2 text-dark" th:href="@{/}">Directory</a>
+        <a class="p-2 text-dark" th:href="@{/}">Pricing</a>
+    </nav>
+
+    <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 btn btn-outline-primary" th:href="@{/login}">Login</a>
+        <a class="p-2 btn btn-outline-primary" th:href="@{/register}">Register</a>
+        <a class="p-2 btn btn-outline-primary" th:href="@{/logout}">Log Out</a>
+    </nav>
+</div>
+
+
+</div>
+</head>
+<body layout:fragment="body"></body>
+
+
+
+
+
+    <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
+            <div class="col-12 col-md">
+                <small class="d-block text-muted pl-3">  © Galois Fields</small>
+                <small class="d-block text-muted pl-3">    galoisfieldsgf@gmail.com</small>
+                <small class="d-block text-muted pl-3">    2024</small>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Features</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">Cool stuff</a></li>
+                    <li><a class="text-muted" href="#">Random feature</a></li>
+                    <li><a class="text-muted" href="#">Team feature</a></li>
+                    <li><a class="text-muted" href="#">Stuff for developers</a></li>
+                    <li><a class="text-muted" href="#">Another one</a></li>
+                    <li><a class="text-muted" href="#">Last time</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Resources</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">Resource</a></li>
+                    <li><a class="text-muted" href="#">Resource name</a></li>
+                    <li><a class="text-muted" href="#">Another resource</a></li>
+                    <li><a class="text-muted" href="#">Final resource</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>About</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="#">Team</a></li>
+                    <li><a class="text-muted" href="#">Locations</a></li>
+                    <li><a class="text-muted" href="#">Privacy</a></li>
+                    <li><a class="text-muted" href="#">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
