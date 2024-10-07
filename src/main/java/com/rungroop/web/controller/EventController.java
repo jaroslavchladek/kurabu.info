@@ -3,7 +3,10 @@ package com.rungroop.web.controller;
 import com.rungroop.web.dto.ClubDto;
 import com.rungroop.web.dto.EventDto;
 import com.rungroop.web.model.Event;
+import com.rungroop.web.model.UserEntity;
+import com.rungroop.web.security.SecurityUtil;
 import com.rungroop.web.service.EventService;
+import com.rungroop.web.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,11 +22,13 @@ import java.util.List;
 @Controller
 public class EventController {
 
-    private final EventService eventService;
+    private EventService eventService;
+    private UserService userService;
 
     @Autowired
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, UserService userService) {
         this.eventService = eventService;
+        this.userService = userService;
     }
 
     @GetMapping("/events/{clubId}/new")

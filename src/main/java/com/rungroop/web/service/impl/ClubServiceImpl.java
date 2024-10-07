@@ -40,7 +40,6 @@ public class ClubServiceImpl implements ClubService {
         String username = SecurityUtil.getSessionUser();
         UserEntity user = userRepository.findByUsername(username);
         Club club = mapToClub(clubDto);
-        club.setCreatedBy(user);
         return clubRepository.save(club);
     }
 
@@ -55,7 +54,6 @@ public class ClubServiceImpl implements ClubService {
         String username = SecurityUtil.getSessionUser();
         UserEntity user = userRepository.findByUsername(username);
         Club club = mapToClub(clubDto);
-        club.setCreatedBy(user);
         clubRepository.save(club);
     }
 

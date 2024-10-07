@@ -8,6 +8,7 @@ import com.rungroop.web.service.ClubService;
 import com.rungroop.web.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,8 +23,9 @@ public class ClubController {
     private UserService userService;
 
     @Autowired
-    public ClubController(ClubService clubService) {
+    public ClubController(ClubService clubService, UserService userService) {
         this.clubService = clubService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
@@ -33,14 +35,7 @@ public class ClubController {
 
     @GetMapping("/clubs")
     public String listClubs(Model model) {
-        UserEntity user = new UserEntity();
         List<ClubDto> clubs = clubService.findAllClubs();
-        String username = SecurityUtil.getSessionUser();
-        if (username != null) {
-            user = userService.findByUsername(username);
-            model.addAttribute("user", user);
-        }
-        model.addAttribute("user", user);
         model.addAttribute("clubs", clubs);
         return "clubs-list";
     }
@@ -71,14 +66,7 @@ public class ClubController {
 
     @GetMapping("/clubs/{clubId}")
     public String clubDetail(@PathVariable("clubId") long clubId, Model model) {
-        UserEntity user = new UserEntity();
         ClubDto clubDto = clubService.findClubById(clubId);
-        String username = SecurityUtil.getSessionUser();
-        if (username != null) {
-            user = userService.findByUsername(username);
-            model.addAttribute("user", user);
-        }
-        model.addAttribute("user", user);
         model.addAttribute("club", clubDto);
         return "clubs-detail";
     }

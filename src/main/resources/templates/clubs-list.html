@@ -31,9 +31,7 @@
           <a th:text="${club.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" th:href="@{/clubs/{clubId}(clubId=${club.id})}"></a>
         </div>
         <a class="btn btn-primary" th:href="@{/clubs/{clubId}(clubId=${club.id})}">View</a>
-        <div th:if="${user.id} == ${club.createdBy.id}">
-          <a class="btn btn-primary" th:href="@{/clubs/{clubId}/edit(clubId=${club.id})}">Edit</a>
-        </div>
+        <a class="btn btn-primary" th:href="@{/clubs/{clubId}/edit(clubId=${club.id})}">Edit</a>
       </div>
     </div>
   </div>

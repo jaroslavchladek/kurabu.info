@@ -1,7 +1,9 @@
 package com.rungroop.web.dto;
 
 import com.rungroop.web.model.UserEntity;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,9 +18,9 @@ public class ClubDto {
     private String title;
     @NotEmpty(message = "Photo link should not be empty")
     private String photoUrl;
-    @NotEmpty(message = "Content should not be empty")
+    @Column(name = "description", columnDefinition = "TEXT", length = 50000)
+    @Size(max = 50000)  // Apply validation at the DTO level
     private String content;
-    private UserEntity createdBy;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
     private List<EventDto> events;
