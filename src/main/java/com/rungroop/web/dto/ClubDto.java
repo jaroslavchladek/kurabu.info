@@ -1,6 +1,5 @@
 package com.rungroop.web.dto;
 
-import com.rungroop.web.model.UserEntity;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;

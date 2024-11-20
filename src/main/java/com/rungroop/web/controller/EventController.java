@@ -1,10 +1,7 @@
 package com.rungroop.web.controller;
 
-import com.rungroop.web.dto.ClubDto;
 import com.rungroop.web.dto.EventDto;
 import com.rungroop.web.model.Event;
-import com.rungroop.web.model.UserEntity;
-import com.rungroop.web.security.SecurityUtil;
 import com.rungroop.web.service.EventService;
 import com.rungroop.web.service.UserService;
 import jakarta.validation.Valid;

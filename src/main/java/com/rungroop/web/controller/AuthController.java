@@ -1,7 +1,7 @@
 package com.rungroop.web.controller;
 
 import com.rungroop.web.dto.RegistrationDto;
-import com.rungroop.web.model.UserEntity;
+import com.rungroop.web.model.User;
 import com.rungroop.web.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AuthController {
+
     private UserService userService;
 
     public AuthController(UserService userService) {
@@ -29,14 +30,14 @@ public class AuthController {
     @PostMapping("/register/save")
     public String register(@Valid @ModelAttribute("user") RegistrationDto user,
                            BindingResult result, Model model) {
-        UserEntity existingUserEmail = userService.findByEmail(user.getEmail());
+        User existingUserEmail = userService.findByEmail(user.getEmail());
         if (existingUserEmail != null
                 && existingUserEmail.getEmail() != null
                 && !existingUserEmail.getEmail().isEmpty()) {
             return "redirect:/register?fail";
         }
 
-        UserEntity existingUserUsername = userService.findByUsername(user.getUsername());
+        User existingUserUsername = userService.findByUsername(user.getUsername());
         if (existingUserEmail != null
                 && existingUserUsername.getUsername() != null
                 && !existingUserUsername.getUsername().isEmpty()) {
@@ -47,6 +48,7 @@ public class AuthController {
             model.addAttribute("user", user);
             return "register";
         }
+
         userService.saveUser(user);
         return "redirect:/clubs?success";
     }

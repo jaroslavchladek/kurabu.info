@@ -2,7 +2,7 @@ package com.rungroop.web.service.impl;
 
 import com.rungroop.web.dto.ClubDto;
 import com.rungroop.web.model.Club;
-import com.rungroop.web.model.UserEntity;
+import com.rungroop.web.model.User;
 import com.rungroop.web.repository.ClubRepository;
 import com.rungroop.web.repository.UserRepository;
 import com.rungroop.web.security.SecurityUtil;
@@ -38,7 +38,7 @@ public class ClubServiceImpl implements ClubService {
     @Override
     public Club saveClub(ClubDto clubDto) {
         String username = SecurityUtil.getSessionUser();
-        UserEntity user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username);
         Club club = mapToClub(clubDto);
         return clubRepository.save(club);
     }
@@ -52,7 +52,7 @@ public class ClubServiceImpl implements ClubService {
     @Override
     public void updateClub(ClubDto clubDto) {
         String username = SecurityUtil.getSessionUser();
-        UserEntity user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username);
         Club club = mapToClub(clubDto);
         clubRepository.save(club);
     }

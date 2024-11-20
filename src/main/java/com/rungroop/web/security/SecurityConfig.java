@@ -33,22 +33,41 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
-                .requestMatchers("/login", "/register", "/clubs", "/css/**", "/js/**")
-                .permitAll()
-                .and()
+//        http.csrf().disable()
+//                .authorizeRequests()
+//                .requestMatchers("/login", "/register", "/clubs", "/css/**", "/js/**")
+//                .permitAll()
+//                .and()
+//                .formLogin(form -> form
+//                        .loginPage("/login")
+//                        .defaultSuccessUrl("/clubs")
+//                        .loginProcessingUrl("/login")
+//                        .failureUrl("/login?error=true")
+//                        .permitAll()
+//                ).logout(
+//                        logout -> logout
+//                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                                .permitAll()
+//                );
+
+        http
+                .csrf().disable()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/register", "/login", "/clubs", "/css/**", "/js/**")
+                        .permitAll()
+                )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/clubs")
                         .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/clubs")
                         .failureUrl("/login?error=true")
                         .permitAll()
-                ).logout(
-                        logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("logout"))
+                        .permitAll()
                 );
+
         return http.build();
     }
 

@@ -1,10 +1,10 @@
 package com.rungroop.web.service;
 
 import com.rungroop.web.dto.RegistrationDto;
-import com.rungroop.web.model.UserEntity;
+import com.rungroop.web.model.User;
 
 public interface UserService {
     void saveUser(RegistrationDto registrationDto);
-    UserEntity findByEmail(String email);
-    UserEntity findByUsername(String username);
+    User findByEmail(String email);
+    User findByUsername(String username);
 }

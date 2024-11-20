@@ -2,13 +2,10 @@ package com.rungroop.web.controller;
 
 import com.rungroop.web.dto.ClubDto;
 import com.rungroop.web.model.Club;
-import com.rungroop.web.model.UserEntity;
-import com.rungroop.web.security.SecurityUtil;
 import com.rungroop.web.service.ClubService;
 import com.rungroop.web.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

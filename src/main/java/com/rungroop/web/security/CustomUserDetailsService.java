@@ -1,10 +1,9 @@
 package com.rungroop.web.security;
 
-import com.rungroop.web.model.UserEntity;
+import com.rungroop.web.model.User;
 import com.rungroop.web.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,9 +23,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = userRepository.findFirstByUsername(username);
+        User user = userRepository.findFirstByUsername(username);
         if (user != null) {
-            User authUser = new User(
+            org.springframework.security.core.userdetails.User authUser =
+                    new org.springframework.security.core.userdetails.User(
                     user.getEmail(),
                     user.getPassword(),
                     user.getRoles().stream().map((role)
@@ -36,7 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             return authUser;
         }
         else {
-            throw new UsernameNotFoundException("Invalid username or password");
+            throw new UsernameNotFoundException("Invalid username or password.");
         }
     }
 
