@@ -19,15 +19,17 @@
 </head>
 <body>
 <section layout:fragment="body" class="py-5">
-
   <body>
-
 
   <!-- Page header with logo and tagline-->
   <header class="py-1 bg-light border-bottom mb-4">
     <div class="container">
       <div class="text-center">
         <h1 class="fw-bolder" th:text="${club.title}"></h1>
+      </div>
+
+      <div th:if="${param.unauthorized}" class="alert alert-danger">
+        Unauthorized. Please login as the creation user or an admin.
       </div>
     </div>
   </header>
@@ -44,8 +46,9 @@
             <div class="small text-muted" th:text="${club.createdOn}"></div>
             <h2 class="card-title" th:text="${club.title}"></h2>
             <p class="card-text" th:text="${club.content}"></p>
-            <a class="btn btn-primary" th:href="@{/clubs/{clubId}/delete(clubId=${club.id})}">Delete</a>
-            <a class="btn btn-primary" th:href="@{/events/{clubId}/new(clubId=${club.id})}">Add Event</a>
+              <a class="btn btn-primary" th:href="@{/clubs/{clubId}/edit(clubId=${club.id})}">Edit</a>
+              <a class="btn btn-primary" th:href="@{/clubs/{clubId}/delete(clubId=${club.id})}">Delete</a>
+              <a class="btn btn-primary" th:href="@{/events/{clubId}/new(clubId=${club.id})}">Add Event</a>
           </div>
         </div>
 
@@ -94,19 +97,25 @@
 
         <!-- Nested row for non-featured blog Events-->
         <div class="row">
-          <div class="col-lg-6">
-            <!-- Blog Event-->
-            <div th:each="event :${club.events}" class="card mb-4" >
-              <a href="#!"><img class="card-img-top" th:src="${event.photoUrl}" alt="..."></a>
+          <!-- Iterate through events -->
+          <div th:each="event : ${club.events}" class="col-lg-6 mb-4">
+            <!-- Event Card -->
+            <div class="card h-100">
+              <a href="#!">
+                <img class="card-img-top" th:src="${event.photoUrl}" alt="Event Image">
+              </a>
               <div class="card-body">
                 <div class="small text-muted" th:text="${event.startTime}">January 1, 2023</div>
                 <h2 class="card-title h4" th:text="${event.name}">Event Title</h2>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
+                <p class="card-text" th:text="${event.type}">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.
+                </p>
                 <a class="btn btn-primary" th:href="@{/events/{eventId}(eventId=${event.id})}">More →</a>
               </div>
             </div>
           </div>
         </div>
+
 
 
         <!-- Pagination-->
@@ -130,14 +139,17 @@
       <div class="col-lg-4">
         <!-- Search widget-->
         <div class="card mb-4">
-          <div class="card-header">Search</div>
+          <div class="card-header">Search clubs</div>
           <div class="card-body">
-            <div class="input-group">
-              <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search">
-              <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-            </div>
+            <form th:action="@{/clubs/search}" class="form-inline">
+              <div class="input-group">
+                <input name="query" class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search">
+                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+              </div>
+            </form>
           </div>
         </div>
+
         <!-- Categories widget-->
         <div class="card mb-4">
           <div class="card-header">Categories</div>
@@ -160,6 +172,7 @@
             </div>
           </div>
         </div>
+
         <!-- Side widget-->
         <div class="card mb-4">
           <div class="card-header">Side Widget</div>

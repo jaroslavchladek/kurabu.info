@@ -21,15 +21,23 @@
     <div th:if="${param.login}" class="alert alert-success">
       You have been logged in!
     </div>
+    <div th:if="${param.unauthorized}" class="alert alert-danger">
+      Unauthorized. Please login as the creation user or an admin.
+    </div>
     <div class="text-center mb-5">
       <h1 class="display-4">Find Clubs</h1>
     </div>
     <div class="row gx-5">
       <div th:each="club :${clubs}" class="col-lg-6 mb-2 pb-3">
         <div class="position-relative mb-3">
-          <img class="img-fluid rounded-3 mb-3" th:src="${club.photoUrl}" alt="..."/>
-          <a th:text="${club.title}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" th:href="@{/clubs/{clubId}(clubId=${club.id})}"></a>
+          <!-- Club Image -->
+          <a th:href="@{/clubs/{clubId}(clubId=${club.id})}">
+            <img class="img-fluid rounded-3 mb-3" th:src="${club.photoUrl}" alt="..."/>
+          </a>
+          <!-- Club Title Below Image -->
+          <a th:text="${club.title}" class="h3 fw-bolder text-decoration-none link-dark d-block" th:href="@{/clubs/{clubId}(clubId=${club.id})}"></a>
         </div>
+        <!-- Action Buttons -->
         <a class="btn btn-primary" th:href="@{/clubs/{clubId}(clubId=${club.id})}">View</a>
         <a class="btn btn-primary" th:href="@{/clubs/{clubId}/edit(clubId=${club.id})}">Edit</a>
       </div>
@@ -38,7 +46,7 @@
 
 
 
-  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center d-flex p-2 row justify-content-center align-items-center">
+  <div id="pricing-header" class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center d-flex p-2 row justify-content-center align-items-center">
     <h1 class="display-4">Pricing</h1>
     <p class="lead pl-4" style="max-width: 600px; align: center;">Enjoy the full wonder of Japanese clubbing at your fingertips.</p>
   </div>

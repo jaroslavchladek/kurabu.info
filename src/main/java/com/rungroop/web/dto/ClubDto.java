@@ -1,5 +1,7 @@
 package com.rungroop.web.dto;
 
+import com.rungroop.web.model.User;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -12,6 +14,7 @@ import java.util.List;
 @Data
 @Builder
 public class ClubDto {
+
     private Long id;
     @NotEmpty(message = "Club title should not be empty")
     private String title;
@@ -20,7 +23,9 @@ public class ClubDto {
     @Column(name = "description", columnDefinition = "TEXT", length = 50000)
     @Size(max = 50000)  // Apply validation at the DTO level
     private String content;
+    private User createdBy;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
     private List<EventDto> events;
+
 }

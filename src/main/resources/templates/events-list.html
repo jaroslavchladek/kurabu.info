@@ -36,9 +36,14 @@
         <div class="row gx-5">
             <div th:each="event :${events}" class="col-lg-6 mb-2 pb-3">
                 <div class="position-relative mb-3">
-                    <img class="img-fluid rounded-3 mb-3" th:src="${event.photoUrl}" alt="..."/>
-                    <a th:text="${event.name}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!"></a>
+                    <!-- Event Image -->
+                    <a th:href="@{/events/{eventId}(eventId=${event.id})}">
+                        <img class="img-fluid rounded-3 mb-3" th:src="${event.photoUrl}" alt="..."/>
+                    </a>
+                    <!-- Event Title Below Image -->
+                    <a th:text="${event.name}" class="h3 fw-bolder text-decoration-none link-dark d-block" th:href="@{/events/{eventId}(eventId=${event.id})}"></a>
                 </div>
+                <!-- Action Buttons -->
                 <a class="btn btn-primary" th:href="@{/events/{eventId}(eventId=${event.id})}">View</a>
                 <a class="btn btn-primary" th:href="@{/events/{eventId}/edit(eventId=${event.id})}">Edit</a>
                 <a class="btn btn-primary" th:href="@{/events/{eventId}/delete(eventId=${event.id})}">Delete</a>

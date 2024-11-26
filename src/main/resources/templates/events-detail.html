@@ -2,6 +2,7 @@
 <html lang="en"
       xmlns:th="https://thymeleaf.org"
       xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://thymeleaf.org"
       layout:decorate="~{layout}"
 >
 <head>
@@ -43,11 +44,10 @@
                         <div class="small text-muted" th:text="${event.createdOn}"></div>
                         <h2 class="card-title" th:text="${event.name}"></h2>
                         <p class="card-text" th:text="${event.type}"></p>
-                        <a class="btn btn-primary" th:href="@{/events/${eventId}/delete(eventId=${event.id})}">Delete</a>
-                        <a class="btn btn-primary" th:href="@{/events/${eventId}/edit(eventId=${event.id})}">Edit</a>
+                            <a class="btn btn-primary" th:href="@{/events/{eventId}/delete(eventId=${event.id})}">Delete</a>
+                            <a class="btn btn-primary" th:href="@{/events/{eventId}/edit(eventId=${event.id})}">Edit</a>
                     </div>
                 </div>
-
 
                 <div class="card-header">Location</div>
                 <div id="contact" class="map pb-4">
@@ -55,8 +55,6 @@
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.6454720887546!2d139.6949713768007!3d35.66110547259382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188ca90b39b971%3A0x731249a28e21e3a7!2sShibuya%20CLUB%20QUATTRO!5e0!3m2!1sen!2scz!4v1719933489910!5m2!1sen!2scz" width="731" height="550" style="border:0;" allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
-
-
 
             <!-- Side widgets-->
             <div class="col-lg-4">
@@ -70,6 +68,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Categories widget-->
                 <div class="card mb-4">
                     <div class="card-header">Categories</div>
@@ -92,6 +91,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Side widget-->
                 <div class="card mb-4">
                     <div class="card-header">Side Widget</div>
