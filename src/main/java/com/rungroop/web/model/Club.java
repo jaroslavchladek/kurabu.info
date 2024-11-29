@@ -40,4 +40,7 @@ public class Club {
 
     @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE)
     private List<Event> events = new ArrayList<>();
+
+    @Size(max = 5000)
+    private String locationMapLink;
 }

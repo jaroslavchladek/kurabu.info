@@ -2,8 +2,6 @@ package com.rungroop.web.controller;
 
 import com.rungroop.web.dto.ClubDto;
 import com.rungroop.web.dto.EventDto;
-import com.rungroop.web.mapper.EventMapper;
-import com.rungroop.web.model.Club;
 import com.rungroop.web.model.Event;
 import com.rungroop.web.model.Role;
 import com.rungroop.web.model.User;
@@ -21,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -68,6 +67,9 @@ public class EventController {
             return "redirect:/clubs/" + clubId + "?unauthorized";
 
         Event event = new Event();
+        // Default Start and End Time is today and tomorrow.
+        event.setStartTime(LocalDateTime.now());
+        event.setEndTime(LocalDateTime.now().plusDays(1));
         model.addAttribute("clubId", clubId);
         model.addAttribute("event", event);
 
@@ -88,7 +90,7 @@ public class EventController {
             model.addAttribute("event", eventDto);
             return "clubs-create";
         }
-        eventService.createEvent(clubId, eventDto);
+        eventService.saveEvent(clubId, eventDto);
         return "redirect:/clubs/" + clubId;
     }
 
@@ -114,12 +116,13 @@ public class EventController {
             model.addAttribute("user", user);
         }
 
+        model.addAttribute("user", user);
         model.addAttribute("events", events);
         return "events-list";
     }
 
     @GetMapping("/events/{eventId}")
-    public String viewEvent(@PathVariable("eventId") Long eventId, Model model) {
+    public String eventDetail(@PathVariable("eventId") Long eventId, Model model) {
         User user = new User();
         EventDto eventDto = eventService.findEventById(eventId);
 
@@ -129,7 +132,9 @@ public class EventController {
             model.addAttribute("user", user);
         }
 
-        model.addAttribute("club", eventDto);
+        model.addAttribute("user", user);
+        model.addAttribute("club", eventDto.getClub());
+        model.addAttribute("creationUser", eventDto.getClub().getCreatedBy());
         model.addAttribute("event", eventDto);
         return "events-detail";
     }

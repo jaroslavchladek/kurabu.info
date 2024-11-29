@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.rungroop.web.mapper.ClubMapper;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,6 +42,10 @@ public class ClubServiceImpl implements ClubService {
         User user = userRepository.findByEmail(userEmail);
         Club club = mapToClub(clubDto);
         club.setCreatedBy(user);
+        club.setLocationMapLink(
+                extractBetweenQuotes(club.getLocationMapLink())
+        );
+        club.setCreatedOn(LocalDateTime.now());
         return clubRepository.save(club);
     }
 
@@ -56,6 +61,10 @@ public class ClubServiceImpl implements ClubService {
         User user = userRepository.findByEmail(userEmail);
         Club club = mapToClub(clubDto);
         club.setCreatedBy(user);
+        club.setLocationMapLink(
+                extractBetweenQuotes(club.getLocationMapLink())
+        );
+        club.setUpdatedOn(LocalDateTime.now());
         clubRepository.save(club);
     }
 
@@ -67,7 +76,18 @@ public class ClubServiceImpl implements ClubService {
     @Override
     public List<ClubDto> searchClubs(String query) {
         List<Club> clubs = clubRepository.searchClubs(query);
-        return clubs.stream().map(club -> mapToClubDto(club)).collect(Collectors.toList());
+        return clubs.stream().map(ClubMapper::mapToClubDto).collect(Collectors.toList());
+    }
+
+    public static String extractBetweenQuotes(String input) {
+        int firstQuoteIndex = input.indexOf("\"");
+        int secondQuoteIndex = input.indexOf("\"", firstQuoteIndex + 1);
+
+        if (firstQuoteIndex != -1 && secondQuoteIndex != -1) {
+            return input.substring(firstQuoteIndex + 1, secondQuoteIndex);
+        }
+
+        return input;  // Return the input String unchanged if quotation marks are not found properly.
     }
 
 }

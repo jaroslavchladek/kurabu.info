@@ -18,6 +18,7 @@ public class ClubMapper {
                 .createdOn(clubDto.getCreatedOn())
                 .createdBy(clubDto.getCreatedBy())
                 .updatedOn(clubDto.getUpdatedOn())
+                .locationMapLink(clubDto.getLocationMapLink())
                 .build();
         return club;
     }
@@ -31,6 +32,7 @@ public class ClubMapper {
                 .createdOn(club.getCreatedOn())
                 .createdBy(club.getCreatedBy())
                 .updatedOn(club.getUpdatedOn())
+                .locationMapLink(club.getLocationMapLink())
                 .events(club.getEvents().stream().map((event) -> mapToEventDto(event)).collect(Collectors.toList()))
                 .build();
         return clubDto;

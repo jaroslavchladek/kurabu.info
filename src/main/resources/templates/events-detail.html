@@ -42,6 +42,7 @@
                     <a href="#!"><img class="card-img-top" th:src="${event.photoUrl}"></a>
                     <div class="card-body">
                         <div class="small text-muted" th:text="${event.createdOn}"></div>
+                        <div class="small text-muted mb-2" th:text="${creationUser.username}"></div>
                         <h2 class="card-title" th:text="${event.name}"></h2>
                         <p class="card-text" th:text="${event.type}"></p>
                             <a class="btn btn-primary" th:href="@{/events/{eventId}/delete(eventId=${event.id})}">Delete</a>
@@ -52,7 +53,7 @@
                 <div class="card-header">Location</div>
                 <div id="contact" class="map pb-4">
                     <!-- th:src-->
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.6454720887546!2d139.6949713768007!3d35.66110547259382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188ca90b39b971%3A0x731249a28e21e3a7!2sShibuya%20CLUB%20QUATTRO!5e0!3m2!1sen!2scz!4v1719933489910!5m2!1sen!2scz" width="731" height="550" style="border:0;" allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe th:src="${event.locationMapLink}" width="731" height="550" style="border:0;" allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
 
@@ -60,12 +61,14 @@
             <div class="col-lg-4">
                 <!-- Search widget-->
                 <div class="card mb-4">
-                    <div class="card-header">Search</div>
+                    <div class="card-header">Search clubs</div>
                     <div class="card-body">
-                        <div class="input-group">
-                            <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search">
-                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                        </div>
+                        <form th:action="@{/clubs/search}" class="form-inline">
+                            <div class="input-group">
+                                <input name="query" class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search">
+                                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
 
@@ -76,16 +79,12 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">Web Design</a></li>
-                                    <li><a href="#!">HTML</a></li>
-                                    <li><a href="#!">Freebies</a></li>
+                                    <li><a th:href="@{/clubs}">Clubs</a></li>
                                 </ul>
                             </div>
                             <div class="col-sm-6">
                                 <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">JavaScript</a></li>
-                                    <li><a href="#!">CSS</a></li>
-                                    <li><a href="#!">Tutorials</a></li>
+                                    <li><a th:href="@{/events}">Events</a></li>
                                 </ul>
                             </div>
                         </div>

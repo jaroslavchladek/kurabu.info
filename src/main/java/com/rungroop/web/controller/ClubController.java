@@ -117,6 +117,8 @@ public class ClubController {
             model.addAttribute("user", user);
         }
 
+        model.addAttribute("user", user);
+        model.addAttribute("creationUser", clubDto.getCreatedBy());
         model.addAttribute("club", clubDto);
         return "clubs-detail";
     }

@@ -1,6 +1,7 @@
 package com.rungroop.web.dto;
 
 import com.rungroop.web.model.Club;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,13 +18,16 @@ import java.time.LocalDateTime;
 public class EventDto {
     private Long id;
     private String name;
-    @DateTimeFormat(pattern="HH:mm:ss YYYY/MM/DD")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime startTime;
-    @DateTimeFormat(pattern="HH:mm:ss'T'YYYY/MM/DD")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime endTime;
     private String photoUrl;
     private String type;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
     private Club club;
+
+    @Size(max = 5000)  // Apply validation at the DTO level
+    private String locationMapLink;
 }

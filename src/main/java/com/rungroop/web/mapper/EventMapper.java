@@ -28,6 +28,7 @@ public class EventMapper {
                 .photoUrl(event.getPhotoUrl())
                 .type(event.getType())
                 .club(event.getClub())
+                .locationMapLink(event.getLocationMapLink())
                 .build();
         return eventDto;
     }
@@ -43,6 +44,7 @@ public class EventMapper {
                 .photoUrl(eventDto.getPhotoUrl())
                 .type(eventDto.getType())
                 .club(eventDto.getClub())
+                .locationMapLink(eventDto.getLocationMapLink())
                 .build();
         return event;
     }

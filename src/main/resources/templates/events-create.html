@@ -39,7 +39,7 @@
                                 id="type"
                                 name="type"
                                 th:field="*{type}"
-                                placeholder="type">
+                                placeholder="Type">
                         <p th:if="${#fields.hasErrors('type')}" class="text-danger pt-1" th:errors="*{type}"></p>
                     </div>
                 </div>
@@ -53,13 +53,27 @@
                                 id="photoUrl"
                                 name="photoUrl"
                                 th:field="*{photoUrl}"
-                                placeholder="photoUrl">
+                                placeholder="PhotoUrl">
                         <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger pt-1" th:errors="*{photoUrl}"></p>
                     </div>
                 </div>
 
                 <div class="form-group row mb-3">
-                    <label for="startTime" class="col-sm-2 col-form-label">startTime</label>
+                    <label for="locationMapLink" class="col-sm-2 col-form-label">LocationMapIframe</label>
+                    <div class="col-sm-10">
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="locationMapLink"
+                                name="locationMapLink"
+                                th:field="*{locationMapLink}"
+                                placeholder="LocationEmbeddedMapIframe">
+                        <p th:if="${#fields.hasErrors('locationMapLink')}" class="text-danger pt-1" th:errors="*{locationMapLink}"></p>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-3">
+                    <label for="startTime" class="col-sm-2 col-form-label">StartTime</label>
                     <div class="col-sm-10">
                         <input
                                 type="datetime-local"
@@ -67,13 +81,14 @@
                                 id="startTime"
                                 name="startTime"
                                 th:field="*{startTime}"
-                                placeholder="startTime">
-                        <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger pt-1" th:errors="*{startTime}"></p>
+                                placeholder="StartTime"
+                                required>
+                        <p th:if="${#fields.hasErrors('startTime')}" class="text-danger pt-1" th:errors="*{startTime}"></p>
                     </div>
                 </div>
 
                 <div class="form-group row mb-3">
-                    <label for="endTime" class="col-sm-2 col-form-label">endTime</label>
+                    <label for="endTime" class="col-sm-2 col-form-label">EndTime</label>
                     <div class="col-sm-10">
                         <input
                                 type="datetime-local"
@@ -81,7 +96,8 @@
                                 id="endTime"
                                 name="endTime"
                                 th:field="*{endTime}"
-                                placeholder="endTime">
+                                placeholder="EndTime"
+                                required>
                         <p th:if="${#fields.hasErrors('endTime')}" class="text-danger pt-1" th:errors="*{endTime}"></p>
                     </div>
                 </div>

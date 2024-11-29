@@ -1,6 +1,7 @@
 package com.rungroop.web.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,4 +35,7 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "club_id", nullable = false)
     private Club club;
+
+    @Size(max = 5000)
+    private String locationMapLink;
 }

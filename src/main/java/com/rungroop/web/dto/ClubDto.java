@@ -14,7 +14,6 @@ import java.util.List;
 @Data
 @Builder
 public class ClubDto {
-
     private Long id;
     @NotEmpty(message = "Club title should not be empty")
     private String title;
@@ -28,4 +27,6 @@ public class ClubDto {
     private LocalDateTime updatedOn;
     private List<EventDto> events;
 
+    @Size(max = 5000)  // Apply validation at the DTO level
+    private String locationMapLink;
 }
