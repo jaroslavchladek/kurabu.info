@@ -1,0 +1,10 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    ports:
+      - "5433:5432"   # Map host's port 5434 to container's port 5432
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
