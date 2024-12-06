@@ -23,5 +23,5 @@ RUN ./mvnw clean package -DskipTests
 
 
 VOLUME /tmp
-COPY target/*.jar app.jar
+COPY /app/target/*.jar app.jar
 ENTRYPOINT ["java","-jar","/app/app.jar"]
