@@ -39,6 +39,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void saveUserAdmin(RegistrationDto registrationDto) {
+        User user = new User();
+        user.setUsername(registrationDto.getUsername());
+        user.setEmail(registrationDto.getEmail());
+        user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
+        Role role = new Role(null, "USER", List.of(user));
+        Role adminRole = new Role(null, "ADMIN", List.of(user));
+        user.setRoles(List.of(role, adminRole));
+        userRepository.save(user);
+    }
+
+    @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }

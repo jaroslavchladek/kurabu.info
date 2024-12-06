@@ -1,10 +1,32 @@
-version: '3.1'
+version: '3.8'
 
 services:
-  db:
-    image: postgres
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "5433:5432"   # Map host's port 5434 to container's port 5432
-    restart: always
+      - "8080:8080"
+    depends_on:
+      - db
     environment:
+      SPRING_DATASOURCE_URL: jdbc:h2:mem:rungroopcourse;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+
+  db:
+    image: postgres:15
+    container_name: postgres3
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: rungroopcourse
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:

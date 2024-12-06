@@ -1,27 +1,27 @@
-# Use OpenJDK base image
 FROM openjdk:17-jdk-slim
 
-# Set the maintainer
-MAINTAINER jaroslavchladek.com
 
-# Install Maven
-RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
 
-# Create the working directory
-RUN mkdir /app
+# Use Maven image to build the project
+FROM maven:3.9.5-eclipse-temurin-17 AS build
 
-# Set the working directory
+# Set working directory inside the container
 WORKDIR /app
 
-# Copy the Maven project files into the image
-COPY pom.xml /app
-COPY src /app/src
+# Copy Maven wrapper and source files
+COPY mvnw .
+COPY .mvn .mvn
+COPY pom.xml .
+COPY src ./src
 
-# Build the project using Maven
-RUN mvn -c clean package -Dmaven.test.skip=true
+# Make the Maven wrapper executable
+RUN chmod +x mvnw
 
-# Copy the built jar file to the final image
+# Build the project
+RUN ./mvnw clean package -DskipTests
+
+
+
+VOLUME /tmp
 COPY target/*.jar app.jar
-
-# Define the entry point
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java","-jar","/app/app.jar"]

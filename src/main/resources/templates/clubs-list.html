@@ -15,6 +15,9 @@
 
 
   <div class="container px-5 my-5">
+    <div th:if="${param.success_admin}" class="alert alert-success">
+      You have successfully created an Admin user!
+    </div>
     <div th:if="${param.success}" class="alert alert-success">
       You have been registered successfully!
     </div>

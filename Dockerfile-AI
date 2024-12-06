@@ -1,0 +1,30 @@
+# Use OpenJDK base image
+FROM openjdk:17-jdk-slim
+
+# Set the maintainer
+MAINTAINER jaroslavchladek.com
+
+# Install Maven
+RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
+
+# Create the working directory
+RUN mkdir /app
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the Maven project files into the image
+COPY pom.xml /app
+COPY src /app/src
+
+# Build the project using Maven
+RUN mvn -c clean package -Dmaven.test.skip=true
+
+# Copy the built jar file to the final image
+COPY target/*.jar app.jar
+
+# Expose port 8080 for the Spring Boot application
+EXPOSE 8080
+
+# Define the entry point
+ENTRYPOINT ["java", "-jar", "app.jar"]

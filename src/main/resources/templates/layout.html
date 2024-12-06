@@ -36,6 +36,9 @@
         <a class="p-2 btn btn-outline-primary" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
         <a class="p-2 btn btn-outline-primary" sec:authorize="!isAuthenticated()" th:href="@{/register}">Register</a>
 
+        <div class="navbar-text text-primary pl-2 pr-2 p-2" sec:authorize="isAuthenticated()">
+            <span th:text="${#authentication.name}">User</span>
+        </div>
         <!-- Show Log Out only when the user is authenticated -->
         <a class="p-2 btn btn-outline-primary" sec:authorize="isAuthenticated()" th:href="@{/logout}">Log Out</a>
     </nav>
