@@ -6,14 +6,46 @@
 >
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Add viewport for responsiveness -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
     <link th:href="@{/css/styles.css}" rel="stylesheet">
     <meta name="keywords" content="japan, nippon, clubs, kurabu, tokyo, osaka, nagoya">
     <meta name="copyright" content="© Galois Fields (galoisfieldsgf@gmail.com), All rights reserved.">
     <meta name="description" content="kurabu.info | Your gateway to Japanese clubs.">
     <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">kurabu.info</title>
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <a class="btn btn-link" style="text-decoration: none;" th:href="@{/clubs}"><h4 class="my-0 mr-md-auto font-weight-normal" th:href="@{/clubs}">kurabu.info</h4></a>
+        <form th:action="@{/clubs/search}" class="form-inline">
+            <input name="query" class="form-control" type="search" placeholder="Search clubs" aria-label="Search">
+        </form>
+
+    <nav class="my-2 my-md-0 mr-md-3">
+        <button id="theme-toggle" class="btn btn-outline-primary">Dark Mode</button>
+    </nav>
+
+    <nav class="my-2 my-md-0 mr-md-3 ml-auto">
+        <a class="p-2 text-dark" th:href="@{/clubs}">Home</a>
+        <a class="p-2 text-dark" th:href="@{/clubs}">Find Clubs</a>
+        <a class="p-2 text-dark" th:href="@{/events}">Find Events</a>
+        <a class="p-2 text-dark" th:href="@{/clubs/new}">Add a Club</a>
+        <a class="p-2 text-dark" th:href="@{/clubs#pricing-header}">Pricing</a>
+    </nav>
+
+    <nav class="my-2 my-md-0 mr-md-3">
+        <!-- Show Login and Register only when the user is not authenticated -->
+        <a class="p-2 btn btn-outline-primary" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+        <a class="p-2 btn btn-outline-primary" sec:authorize="!isAuthenticated()" th:href="@{/register}">Register</a>
+
+        <div class="navbar-text text-primary pl-2 pr-2 p-2" sec:authorize="isAuthenticated()">
+            <span th:text="${#authentication.name}">User</span>
+        </div>
+        <!-- Show Log Out only when the user is authenticated -->
+        <a class="p-2 btn btn-outline-primary" sec:authorize="isAuthenticated()" th:href="@{/logout}">Log Out</a>
+    </nav>
+</div>
+
+
+</div>
 </head>
 
 <style>
@@ -23,20 +55,12 @@
             color: #212529;
         }
 
-        .logo {
-            color: #0d6efd !important;
-        }
-
         .bg-white {
             background-color: #ffffff !important;
         }
 
         .text-dark {
-            color: #948a90 !important;
-        }
-
-        .link-dark {
-            color: #544a50 !important;
+            color: #212529 !important;
         }
 
         .text-muted {
@@ -72,10 +96,6 @@
         body.dark-mode {
             background-color: #121212;
             color: #e0e0e0;
-        }
-
-        body.dark-mode .link-dark {
-            color: #e0e0e0 !important;
         }
 
         body.dark-mode .bg-white {
@@ -174,77 +194,46 @@
         }
 </style>
 
-<body>
-<!-- Header -->
-<header class="bg-white border-bottom shadow-sm">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand logo" th:href="@{/clubs}">kurabu.info</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link text-dark" th:href="@{/clubs}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" th:href="@{/clubs}">Find Clubs</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" th:href="@{/events}">Find Events</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" th:href="@{/clubs/new}">Add a Club</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" th:href="@{/clubs#pricing-header}">Pricing</a></li>
-                </ul>
-                <form th:action="@{/clubs/search}" class="d-flex">
-                    <input name="query" class="form-control me-2" type="search" placeholder="Search clubs" aria-label="Search">
-                </form>
-                <div class="d-flex align-items-center">
-                    <a class="btn btn-outline-primary me-2" sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
-                    <a class="btn btn-outline-primary me-2" sec:authorize="!isAuthenticated()" th:href="@{/register}">Register</a>
-                    <div class="text-primary me-2" sec:authorize="isAuthenticated()">
-                        <span th:text="${#authentication.name}">User</span>
-                    </div>
-                    <a class="btn btn-outline-primary" sec:authorize="isAuthenticated()" th:href="@{/logout}">Log Out</a>
-                    <button id="theme-toggle" class="btn btn-outline-primary ms-2">Dark Mode</button>
-                </div>
-            </div>
-        </div>
-    </nav>
-</header>
+<body layout:fragment="body"></body>
 
-<!-- Main Content -->
-<main layout:fragment="body" class="container mt-4"></main>
-
-<!-- Footer -->
-<footer class="pt-4 my-md-5 pt-md-5 border-top">
-    <div class="container">
+    <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div class="row">
-            <div class="col-12 col-md text-center text-md-start pb-4">
-                <small class="d-block text-muted">© Galois Fields, 2024</small>
-                <small class="d-block text-muted">galoisfieldsgf@gmail.com</small>
+            <div class="col-12 col-md">
+                <small class="d-block text-muted pl-3">  © Galois Fields</small>
+                <small class="d-block text-muted pl-3">    galoisfieldsgf@gmail.com</small>
+                <small class="d-block text-muted pl-3">    2024</small>
             </div>
             <div class="col-6 col-md">
                 <h5>Features</h5>
                 <ul class="list-unstyled text-small">
                     <li><a class="text-muted" href="#">Cool stuff</a></li>
                     <li><a class="text-muted" href="#">Random feature</a></li>
+                    <li><a class="text-muted" href="#">Team feature</a></li>
+                    <li><a class="text-muted" href="#">Stuff for developers</a></li>
+                    <li><a class="text-muted" href="#">Another one</a></li>
+                    <li><a class="text-muted" href="#">Last time</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md">
                 <h5>Resources</h5>
                 <ul class="list-unstyled text-small">
                     <li><a class="text-muted" href="#">Resource</a></li>
+                    <li><a class="text-muted" href="#">Resource name</a></li>
                     <li><a class="text-muted" href="#">Another resource</a></li>
+                    <li><a class="text-muted" href="#">Final resource</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md">
                 <h5>About</h5>
                 <ul class="list-unstyled text-small">
                     <li><a class="text-muted" href="#">Team</a></li>
+                    <li><a class="text-muted" href="#">Locations</a></li>
                     <li><a class="text-muted" href="#">Privacy</a></li>
+                    <li><a class="text-muted" href="#">Terms</a></li>
                 </ul>
             </div>
         </div>
-    </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </footer>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -267,6 +256,5 @@
         });
     });
 </script>
-
 </body>
 </html>

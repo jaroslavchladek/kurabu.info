@@ -38,7 +38,7 @@
             <img class="img-fluid rounded-3 mb-3" th:src="${club.photoUrl}" alt="..."/>
           </a>
           <!-- Club Title Below Image -->
-          <a th:text="${club.title}" class="h3 fw-bolder text-decoration-none link-dark d-block" th:href="@{/clubs/{clubId}(clubId=${club.id})}"></a>
+          <a th:text="${club.title}" class="h3 text-decoration-none link-dark d-block" th:href="@{/clubs/{clubId}(clubId=${club.id})}"></a>
         </div>
         <!-- Action Buttons -->
         <a class="btn btn-primary" th:href="@{/clubs/{clubId}(clubId=${club.id})}">View</a>

@@ -41,7 +41,7 @@
                         <img class="img-fluid rounded-3 mb-3" th:src="${event.photoUrl}" alt="..."/>
                     </a>
                     <!-- Event Title Below Image -->
-                    <a th:text="${event.name}" class="h3 fw-bolder text-decoration-none link-dark d-block" th:href="@{/events/{eventId}(eventId=${event.id})}"></a>
+                    <a th:text="${event.name}" class="h3 text-decoration-none link-dark d-block" th:href="@{/events/{eventId}(eventId=${event.id})}"></a>
                 </div>
                 <!-- Action Buttons -->
                 <a class="btn btn-primary" th:href="@{/events/{eventId}(eventId=${event.id})}">View</a>

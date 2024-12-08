@@ -10,7 +10,7 @@ services:
     depends_on:
       - db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:h2:mem:rungroopcourse;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+      SPRING_DATASOURCE_URL: jdbc:h2:mem:kurabu;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
@@ -22,7 +22,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: rungroopcourse
+      POSTGRES_DB: kurabu
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:

@@ -28,4 +28,6 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
     )
     private List<Role> roles = new ArrayList<>();
+    private List<ClubLike> clubLikes = new ArrayList<>();
+    private List<EventLike> eventLikes = new ArrayList<>();
 }
